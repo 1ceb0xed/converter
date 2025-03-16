@@ -10,12 +10,19 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "axios": "^1.8.3",
     "nuxt": "^3.16.0",
     "prettier": "^3.5.3",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "vuetify": "^3.7.16",
+    "vuetify-nuxt-module": "^0.18.4"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.13.2"
+    "@nuxt/devtools": "^2.3.0",
+    "@nuxt/typescript-build": "^3.0.2",
+    "@nuxtjs/tailwindcss": "^6.13.2",
+    "@types/axios": "^0.9.36",
+    "typescript": "^5.8.2"
   }
 }
