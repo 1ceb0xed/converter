@@ -1,30 +1,17 @@
 <script setup lang="ts">
-import axios from 'axios'
-export interface item {
-  [title: string]: number
-}
+import type { item } from '~/layouts/header.vue'
 definePageMeta({
   layout: 'header',
 })
 const props = defineProps<{
   selectedValue: string
   filteredValues: string[]
+  itemsFromApi: item
 }>()
-const fetchApi = async (): Promise<void> => {
-  try {
-    const { data } = await axios.get<item>(apiLink)
-    itemsFromApi.value = data
-  } catch (err) {
-    console.log(err)
-  }
-}
-onMounted(async (): Promise<void> => {
-  await fetchApi()
-})
+
 const filteredValues = toRef(props, 'filteredValues')
 const selectedValue = toRef(props, 'selectedValue')
-const apiLink: string = 'https://status.neuralgeneration.com/api/currency'
-const itemsFromApi = ref<item>({})
+const itemsFromApi = toRef(props, 'itemsFromApi')
 
 const calculateAmount = (item: string): number => {
   const key = `${item.toLowerCase()}-${selectedValue.value.toLowerCase()}`

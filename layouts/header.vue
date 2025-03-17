@@ -1,10 +1,26 @@
 <script setup lang="ts">
-import { fa } from 'vuetify/locale'
-
+import axios from 'axios'
+export interface item {
+  [title: string]: number
+}
+const apiLink: string = 'https://status.neuralgeneration.com/api/currency'
 const selectedValue = ref<'USD' | 'EUR' | 'RUB'>('USD')
 const valueVariables: string[] = ['USD', 'EUR', 'RUB']
+const itemsFromApi = ref<item>({})
 const filteredValues = computed<string[]>(() => {
   return valueVariables.filter((item) => item !== selectedValue.value)
+})
+
+const fetchApi = async (): Promise<void> => {
+  try {
+    const { data } = await axios.get<item>(apiLink)
+    itemsFromApi.value = data
+  } catch (err) {
+    console.log(err)
+  }
+}
+onMounted(async (): Promise<void> => {
+  await fetchApi()
 })
 </script>
 
@@ -20,5 +36,9 @@ const filteredValues = computed<string[]>(() => {
     ></v-select>
   </header>
   <div class="h-1 bg-orange w-full"></div>
-  <nuxt-page :selectedValue="selectedValue" :filteredValues="filteredValues" />
+  <nuxt-page
+    :selectedValue="selectedValue"
+    :filteredValues="filteredValues"
+    :itemsFromApi="itemsFromApi"
+  />
 </template>
