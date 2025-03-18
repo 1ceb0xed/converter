@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { item } from '~/layouts/header.vue'
+import type { values } from '~/layouts/header.vue'
 definePageMeta({
   layout: 'header',
 })
@@ -8,40 +9,42 @@ const props = defineProps<{
   itemsFromApi: item
 }>()
 const itemsFromApi = toRef(props, 'itemsFromApi')
-const selectedValueConverterFirst = ref<'USD' | 'EUR' | 'RUB' | ''>('')
-const selectedValueConverterSecond = ref<'USD' | 'EUR' | 'RUB' | ''>('')
+const selectedValueConverterFirst = ref<values>('')
+const selectedValueConverterSecond = ref<values>('')
 const inputFirst = ref<number | null>(null)
 const inputSecond = ref<number | null>(null)
-const lastChange = ref<'first' | 'second'>('first')
+const valueVariables: string[] = ['USD', 'EUR', 'RUB']
 
-const test = () => {
-  console.log(itemsFromApi.value)
-  console.log(inputSecond.value)
-  console.log(selectedValueConverterFirst.value)
-  console.log(selectedValueConverterSecond.value)
-}
-
-watch(inputFirst, () => {
-  lastChange.value = 'first'
-})
-watch(inputSecond, () => {
-  lastChange.value = 'second'
+const filteredValuesConverter = computed<string[]>((): string[] => {
+  return valueVariables.filter(
+    (item) =>
+      item !== selectedValueConverterFirst.value && item !== selectedValueConverterSecond.value,
+  )
 })
 
-watchEffect(() => {
-  const key = `${selectedValueConverterFirst.value.toLowerCase()}-${selectedValueConverterSecond.value.toLowerCase()}`
-  if (lastChange.value === 'first') {
+const changeFirst = (): void => {
+  if (rate.value) {
     inputSecond.value = inputFirst.value
-      ? Math.round(inputFirst.value * itemsFromApi.value[key] * 100) / 100
-      : null
-  } else if (lastChange.value === 'second') {
-    inputFirst.value = inputSecond.value
-      ? Math.round((inputSecond.value / itemsFromApi.value[key]) * 100) / 100
+      ? Math.round(inputFirst.value * rate.value * 100) / 100
       : null
   }
-}) // убрать дублирование watch, далее убрать округление(оно ломается из за watch) если ввести значение 1 во второй
-//инпут то оно сначала разделит его, потом передаст в первый инпут, а первый инпут умножит его и поэтому во втором
-// инпуте будет 0.85, а не 1
+}
+const changeSecond = (): void => {
+  if (rate.value) {
+    inputFirst.value = inputSecond.value
+      ? Math.round((inputSecond.value / rate.value) * 100) / 100
+      : null
+  }
+}
+const rate = computed((): number => {
+  const key = `${selectedValueConverterFirst.value.toLowerCase()}-${selectedValueConverterSecond.value.toLowerCase()}`
+  return itemsFromApi.value[key]
+})
+
+watch([selectedValueConverterFirst, selectedValueConverterSecond], (): void => {
+  changeFirst()
+  changeSecond()
+})
 </script>
 
 <template>
@@ -57,9 +60,11 @@ watchEffect(() => {
               v-model="selectedValueConverterFirst"
               class="rounded-2xl bg-slate-800 w-full text-white text-xl"
               label="Выбор валюты"
-              :items="['USD', 'EUR', 'RUB']"
+              :items="filteredValuesConverter"
             ></v-select>
             <input
+              @input="changeFirst"
+              id="inputFirstId"
               onkeydown="return event.key !== '-';"
               v-model="inputFirst"
               min="0"
@@ -73,9 +78,11 @@ watchEffect(() => {
               v-model="selectedValueConverterSecond"
               class="rounded-2xl bg-slate-800 w-full text-white text-xl"
               label="Выбор валюты"
-              :items="['USD', 'EUR', 'RUB']"
+              :items="filteredValuesConverter"
             ></v-select>
             <input
+              @input="changeSecond"
+              id="inputSecondId"
               onkeydown="return event.key !== '-';"
               v-model="inputSecond"
               min="0"
@@ -85,7 +92,6 @@ watchEffect(() => {
             />
           </div>
         </form>
-        <button @click="test">test</button>
       </div>
     </section>
   </div>

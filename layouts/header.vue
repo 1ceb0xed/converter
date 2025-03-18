@@ -3,11 +3,12 @@ import axios from 'axios'
 export interface item {
   [title: string]: number
 }
+export type values = 'USD' | 'EUR' | 'RUB' | ''
 const apiLink: string = 'https://status.neuralgeneration.com/api/currency'
-const selectedValue = ref<'USD' | 'EUR' | 'RUB'>('USD')
+const selectedValue = ref<values>('USD')
 const valueVariables: string[] = ['USD', 'EUR', 'RUB']
 const itemsFromApi = ref<item>({})
-const filteredValues = computed<string[]>(() => {
+const filteredValues = computed<string[]>((): string[] => {
   return valueVariables.filter((item) => item !== selectedValue.value)
 })
 
