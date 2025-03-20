@@ -1,0 +1,14 @@
+; 1. переименовать layout +
+; 2. добавить стор, в котором будет загрузка и хранение данных +
+; 3. в layout не должная находится никакая логика и максимально "тонкий" шаблон
+; 4. <header> вынести в отдельный компонент (+ должна быть папка components)
+; 5. вынести appLink в nuxt.config (public)
+;  https://nuxt.com/docs/guide/going-further/runtime-config#environment-variables
+; 6. itemsFromApi - плохое название 
+; 7. export interface item - плохое название для интерфейса 
+; (первое - нет смысла в этом названии, второе - с большой пишутся типы)
+; 8. type values - аналогично
+; 9. отдельная папка для типов
+; 10. лоадинг на момент загрузки
+11. https://www.shadcn-vue.com/docs/components/drawer.html
+12. Подключить i18n (nuxt module) и добавить значок в header смены языка

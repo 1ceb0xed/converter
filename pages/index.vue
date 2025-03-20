@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import type { item } from '~/layouts/header.vue'
-definePageMeta({
-  layout: 'header',
-})
-const props = defineProps<{
-  selectedValue: string
-  filteredValues: string[]
-  itemsFromApi: item
-}>()
+import { useCurrencyStore } from '#imports'
+const currencyStore = useCurrencyStore()
 
-const filteredValues = toRef(props, 'filteredValues')
-const selectedValue = toRef(props, 'selectedValue')
-const itemsFromApi = toRef(props, 'itemsFromApi')
+const { currencyRates, selectedValue, filteredValues } = storeToRefs(currencyStore)
+
+definePageMeta({
+  layout: 'default',
+})
 
 const calculateAmount = (item: string): number => {
   const key = `${item.toLowerCase()}-${selectedValue.value.toLowerCase()}`
-  return Math.round(itemsFromApi.value[key] * 100) / 100
+  return Math.round(currencyRates.value[key] * 100) / 100
 }
 </script>
 

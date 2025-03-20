@@ -1,22 +1,21 @@
 <script setup lang="ts">
-import type { item } from '~/layouts/header.vue'
-import type { values } from '~/layouts/header.vue'
+import { useCurrencyStore } from '#imports'
+const currencyStore = useCurrencyStore()
+
+const {
+  currencyRates,
+  selectedValueConverterFirst,
+  selectedValueConverterSecond,
+  inputFirst,
+  inputSecond,
+} = storeToRefs(currencyStore)
+
 definePageMeta({
-  layout: 'header',
+  layout: 'default',
 })
 
-const props = defineProps<{
-  itemsFromApi: item
-}>()
-const itemsFromApi = toRef(props, 'itemsFromApi')
-const selectedValueConverterFirst = ref<values>('')
-const selectedValueConverterSecond = ref<values>('')
-const inputFirst = ref<number | null>(null)
-const inputSecond = ref<number | null>(null)
-const valueVariables: string[] = ['USD', 'EUR', 'RUB']
-
 const filteredValuesConverter = computed<string[]>((): string[] => {
-  return valueVariables.filter(
+  return currencyStore.valueVariables.filter(
     (item) =>
       item !== selectedValueConverterFirst.value && item !== selectedValueConverterSecond.value,
   )
@@ -38,7 +37,7 @@ const changeSecond = (): void => {
 }
 const rate = computed((): number => {
   const key = `${selectedValueConverterFirst.value.toLowerCase()}-${selectedValueConverterSecond.value.toLowerCase()}`
-  return itemsFromApi.value[key]
+  return currencyRates.value[key]
 })
 
 watch([selectedValueConverterFirst, selectedValueConverterSecond], (): void => {
