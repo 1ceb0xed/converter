@@ -51,14 +51,14 @@ watch([selectedValueConverterFirst, selectedValueConverterSecond], (): void => {
     <section>
       <div class="h-[30vw] w-[60vw] bg-orange rounded-2xl">
         <div class="p-[1.5vw] text-[1.7vw] text-white font-medium flex justify-center">
-          Конвертатор валют
+          {{ $t('converter.ConverterLabel') }}
         </div>
         <form>
           <div class="p-[1.5vw] grid grid-cols-2 gap-5">
             <v-select
               v-model="selectedValueConverterFirst"
               class="rounded-2xl bg-slate-800 w-full text-white text-xl"
-              label="Выбор валюты"
+              :label="$t('converter.DropdownSelectorCurrency')"
               :items="filteredValuesConverter"
             ></v-select>
             <input
@@ -69,14 +69,14 @@ watch([selectedValueConverterFirst, selectedValueConverterSecond], (): void => {
               min="0"
               type="number"
               class="rounded-2xl bg-slate-800 text-xl text-white p-[1vw]"
-              placeholder="Введите сумму"
+              :placeholder="$t('converter.Amount')"
             />
           </div>
           <div class="p-[1.5vw] grid grid-cols-2 gap-5">
             <v-select
               v-model="selectedValueConverterSecond"
               class="rounded-2xl bg-slate-800 w-full text-white text-xl"
-              label="Выбор валюты"
+              :label="$t('converter.DropdownSelectorCurrency')"
               :items="filteredValuesConverter"
             ></v-select>
             <input
@@ -87,7 +87,7 @@ watch([selectedValueConverterFirst, selectedValueConverterSecond], (): void => {
               min="0"
               type="number"
               class="rounded-2xl bg-slate-800 text-xl text-white p-[1vw]"
-              placeholder="Введите сумму"
+              :placeholder="$t('converter.Amount')"
             />
           </div>
         </form>
