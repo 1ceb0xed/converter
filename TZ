@@ -11,4 +11,4 @@
 ; 9. отдельная папка для типов
 ; 10. лоадинг на момент загрузки
 11. https://www.shadcn-vue.com/docs/components/drawer.html
-12. Подключить i18n (nuxt module) и добавить значок в header смены языка
+; 12. Подключить i18n (nuxt module) и добавить значок в header смены языка
