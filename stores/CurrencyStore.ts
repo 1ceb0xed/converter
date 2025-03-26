@@ -1,14 +1,10 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import type { CurrencyRateItem, VariableValues } from '~/interfaces/interfaces'
+import type { CurrencyRateItem, VariableValues } from '~/interfaces/Interfaces'
 export const useCurrencyStore = defineStore('Currency', () => {
   const currencyRates = ref<CurrencyRateItem>({})
   const selectedValue = ref<VariableValues>('USD')
   const valueVariables: string[] = ['USD', 'EUR', 'RUB']
-  const selectedValueConverterFirst = ref<VariableValues>('')
-  const selectedValueConverterSecond = ref<VariableValues>('')
-  const inputFirst = ref<number | null>(null)
-  const inputSecond = ref<number | null>(null)
   const loader = ref<boolean>(true)
   const config = useRuntimeConfig()
   const RATES_LINK = config.public.RATES_LINK
@@ -22,7 +18,7 @@ export const useCurrencyStore = defineStore('Currency', () => {
     }
   }
 
-  const filteredValues = computed<string[]>((): string[] => {
+  const filteredValues = computed<string[]>(() => {
     return valueVariables.filter((item) => item !== selectedValue.value)
   })
 
@@ -38,10 +34,6 @@ export const useCurrencyStore = defineStore('Currency', () => {
     selectedValue,
     valueVariables,
     filteredValues,
-    selectedValueConverterFirst,
-    selectedValueConverterSecond,
-    inputFirst,
-    inputSecond,
     loader,
   }
 })

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useCurrencyStore } from '~/stores/CurrencyStore'
-
 const currencyStore = useCurrencyStore()
 const localPath = useLocalePath()
 const { locale, locales } = useI18n()
@@ -9,11 +7,11 @@ const switchLocalePath = useSwitchLocalePath()
 
 <template>
   <header class="flex gap-[2vw] p-[1vw] justify-center bg-slate-800 text-orange text-2xl">
-    <NuxtLink :to="localPath('/')">{{ $t('header.HomePage') }}</NuxtLink>
-    <NuxtLink :to="localPath('/converter')">{{ $t('header.ConverterPage') }}</NuxtLink>
+    <NuxtLink :to="localPath('/')">{{ $t('header.homePage') }}</NuxtLink>
+    <NuxtLink :to="localPath('/Converter')">{{ $t('header.converterPage') }}</NuxtLink>
     <v-select
       v-model="currencyStore.selectedValue"
-      :label="$t('header.DropdownSelectorMainValue')"
+      :label="$t('header.dropdownSelectorMainValue')"
       :items="currencyStore.valueVariables"
       class="max-w-[200px]"
     ></v-select>

@@ -1,12 +1,7 @@
 <script setup lang="ts">
-import { useCurrencyStore } from '#imports'
 const currencyStore = useCurrencyStore()
 
 const { currencyRates, selectedValue, filteredValues } = storeToRefs(currencyStore)
-
-definePageMeta({
-  layout: 'default',
-})
 
 const calculateAmount = (item: string): number => {
   const key = `${item.toLowerCase()}-${selectedValue.value.toLowerCase()}`

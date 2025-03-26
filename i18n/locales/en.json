@@ -1,13 +1,13 @@
 {
   "header": {
-    "HomePage": "Home",
-    "ConverterPage": "Converter",
-    "DropdownSelectorMainValue": "Main currency"
+    "homePage": "Home",
+    "converterPage": "Converter",
+    "dropdownSelectorMainValue": "Main currency"
   },
   "converter": {
-    "ConverterLabel": "Currency converter",
-    "DropdownSelectorCurrency": "Choosing a currency",
-    "Amount": "Enter the amount"
+    "converterLabel": "Currency converter",
+    "dropdownSelectorCurrency": "Choosing a currency",
+    "amount": "Enter the amount"
   },
   "$vuetify": {
     "open": "Open",
