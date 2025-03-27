@@ -9,12 +9,12 @@ const switchLocalePath = useSwitchLocalePath()
   <header class="flex gap-[2vw] p-[1vw] justify-center bg-slate-800 text-orange text-2xl">
     <NuxtLink :to="localPath('/')">{{ $t('header.homePage') }}</NuxtLink>
     <NuxtLink :to="localPath('/Converter')">{{ $t('header.converterPage') }}</NuxtLink>
-    <v-select
+    <VSelect
       v-model="currencyStore.selectedValue"
       :label="$t('header.dropdownSelectorMainValue')"
       :items="currencyStore.valueVariables"
       class="max-w-[200px]"
-    ></v-select>
+    ></VSelect>
     <NuxtLink
       v-for="{ code, language } in locales"
       :key="code"

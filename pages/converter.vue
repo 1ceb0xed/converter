@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { VSelect } from 'vuetify/components'
 import type { VariableValues } from '~/interfaces/Interfaces'
 const currencyStore = useCurrencyStore()
 const { currencyRates } = storeToRefs(currencyStore)
@@ -49,12 +50,12 @@ watch([selectedValueConverterFirst, selectedValueConverterSecond], () => {
         </div>
         <form>
           <div class="p-[1.5vw] grid grid-cols-2 gap-5">
-            <v-select
+            <VSelect
               v-model="selectedValueConverterFirst"
               class="rounded-2xl bg-slate-800 w-full text-white text-xl"
               :label="$t('converter.dropdownSelectorCurrency')"
               :items="filteredValuesConverter"
-            ></v-select>
+            ></VSelect>
             <input
               @input="changeFirst"
               id="inputFirstId"
@@ -67,12 +68,12 @@ watch([selectedValueConverterFirst, selectedValueConverterSecond], () => {
             />
           </div>
           <div class="p-[1.5vw] grid grid-cols-2 gap-5">
-            <v-select
+            <VSelect
               v-model="selectedValueConverterSecond"
               class="rounded-2xl bg-slate-800 w-full text-white text-xl"
               :label="$t('converter.dropdownSelectorCurrency')"
               :items="filteredValuesConverter"
-            ></v-select>
+            ></VSelect>
             <input
               @input="changeSecond"
               id="inputSecondId"

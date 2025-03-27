@@ -16,8 +16,8 @@ const calculateAmount = (item: string): number => {
         name="value"
         class="m-[2vw] p-[2vw] bg-orange h-[30vw] rounded-2xl text-white text-xl font-medium flex flex-col gap-[1.5vw] items-center"
       >
-        <h2 v-for="item in filteredValues">
-          1 {{ item }} = {{ calculateAmount(item) }} {{ selectedValue }}
+        <h2 v-for="item in filteredValues" :key="item.id">
+          1 {{ item.сurrency }} = {{ calculateAmount(item.сurrency) }} {{ selectedValue }}
         </h2>
       </div>
     </div>

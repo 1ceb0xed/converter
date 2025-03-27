@@ -24,8 +24,12 @@
   "devDependencies": {
     "@nuxt/devtools": "^2.3.0",
     "@nuxt/typescript-build": "^3.0.2",
+    "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/tailwindcss": "^6.13.2",
     "@types/axios": "^0.9.36",
+    "eslint": "^9.23.0",
+    "eslint-plugin-vue": "^10.0.0",
+    "globals": "^16.0.0",
     "typescript": "^5.8.2"
   }
 }

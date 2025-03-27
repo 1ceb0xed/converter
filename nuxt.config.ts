@@ -7,7 +7,13 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', 'vuetify-nuxt-module', '@pinia/nuxt', '@nuxtjs/i18n'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    'vuetify-nuxt-module',
+    '@pinia/nuxt',
+    '@nuxtjs/i18n',
+    '@nuxtjs/eslint-module',
+  ],
   i18n: {
     locales: [
       { code: 'en', file: 'en.json', language: 'English' },

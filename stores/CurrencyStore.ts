@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-import type { CurrencyRateItem, VariableValues } from '~/interfaces/Interfaces'
+import type { CurrencyRateItem, VariableValues, FilteredItem } from '~/interfaces/Interfaces'
 export const useCurrencyStore = defineStore('Currency', () => {
   const currencyRates = ref<CurrencyRateItem>({})
   const selectedValue = ref<VariableValues>('USD')
@@ -18,8 +18,10 @@ export const useCurrencyStore = defineStore('Currency', () => {
     }
   }
 
-  const filteredValues = computed<string[]>(() => {
-    return valueVariables.filter((item) => item !== selectedValue.value)
+  const filteredValues = computed<FilteredItem[]>(() => {
+    return valueVariables
+      .filter((item) => item !== selectedValue.value)
+      .map((item, index) => ({ id: index, сurrency: item }))
   })
 
   onMounted(async (): Promise<void> => {
