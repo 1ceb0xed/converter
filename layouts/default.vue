@@ -4,7 +4,7 @@ const currencyStore = useCurrencyStore()
 
 <template>
   <AppLoader v-if="currencyStore.loader" />
-  <div v-else>
+  <div v-show="!currencyStore.loader">
     <AppHeader />
     <NuxtPage />
   </div>
