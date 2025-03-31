@@ -1,0 +1,16 @@
+{
+  "header": {
+    "homePage": "Главная",
+    "converterPage": "Конвертатор",
+    "dropdownSelectorMainValue": "Основная валюта"
+  },
+  "converter": {
+    "converterLabel": "Конвертатор валют",
+    "dropdownSelectorCurrency": "Выбор валюты",
+    "amount": "Введите сумму"
+  },
+  "$vuetify": {
+    "open": "Открыть",
+    "close": "Закрыть"
+  }
+}
